@@ -2,8 +2,9 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String[] files = {"a_example.txt"};//, "b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt"};
+        String[] files = {"a_example.txt", "b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt"};
         SlideShowGenerator slideShowGeneratorStrategy = new StupidSlideShowGenerator();
+        SlideShowGenerator slideShowGeneratorStrategyVertical = new StupidVerticalSlideShowGenerator();
 
         for (String file : files) {
             System.out.println("Input " + file);
@@ -12,10 +13,16 @@ public class Main {
             InputReader inputReader = new InputReader(file);
             PhotoCollection photoCollection = inputReader.read();
 
-            slideShowGeneratorStrategy.generateSlideShow(photoCollection);
+            if (file == "e_shiny_selfies.txt") {
+                slideShowGeneratorStrategyVertical.generateSlideShow(photoCollection);
 
-            // Call output writer
-            OutputReader.generateOutput(photoCollection, slideShowGeneratorStrategy.getClass().getName() + "_" + file);
+                OutputReader.generateOutput(photoCollection, slideShowGeneratorStrategyVertical.getClass().getName() + "_" + file);
+            } else {
+                slideShowGeneratorStrategy.generateSlideShow(photoCollection);
+
+                // Call output writer
+                OutputReader.generateOutput(photoCollection, slideShowGeneratorStrategy.getClass().getName() + "_" + file);
+            }
         }
     }
 
