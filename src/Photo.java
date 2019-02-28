@@ -12,7 +12,6 @@ public class Photo {
     public Photo(List<String> tags, int id, boolean isHorizontal) {
         this.tags = tags;
         this.id = id;
-        this.used = used;
         this.isHorizontal = isHorizontal;
     }
 
@@ -43,11 +42,15 @@ public class Photo {
         return tags.size();
     }
 
-    public boolean isUsed(){
-        return used;
+    public boolean isNotUsed(){
+        return !used;
     }
 
     public void markAsUsed(){
-        used = false;
+        used = true;
+    }
+
+    public boolean isHorizontal(){
+        return isHorizontal;
     }
 }
