@@ -3,11 +3,12 @@ import java.util.List;
 
 public class Slide {
 
-    List<Photo> photos;
+    List<Photo> photos = new ArrayList<>();
 
-    public Slide(List<Photo> photos) {
-        this.photos = photos;
+    public void addPhoto(Photo photo) {
+        photos.add(photo);
     }
+
 
     public List<Photo> getPhotos() {
         return photos;
@@ -15,7 +16,7 @@ public class Slide {
 
     public List<String> getAllTags() {
         List<String> tags = new ArrayList<>();
-        for(Photo photo : photos) {
+        for (Photo photo : photos) {
             tags.addAll(photo.getTags());
         }
         return tags;

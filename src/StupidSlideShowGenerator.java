@@ -1,19 +1,30 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class StupidSlideShowGenerator implements SlideShowGenerator {
+    List<Photo> photoList;
+    private PhotoCollection photoCollection;
 
     @Override
     public void generateSlideShow(PhotoCollection photoCollection) {
-        List<Photo> photoList = photoCollection.getPhotoCollection();
-        List<Photo> slideOnPhoto = new ArrayList<>();
+        this.photoCollection = photoCollection;
+        photoList = photoCollection.getPhotoCollection();
 
-        for (Photo photo : photoList) {
-            for (Photo comparePhoto : photoList) {
-                if (photo.compareTo(comparePhoto) > 1) {
-                    System.out.println("Photo found");
-                    photoCollection.addSlide(new Slide(slideOnPhoto));
-                }
+        Photo firstPhoto = photoList.get(0);
+        Slide slide = new Slide();
+        slide.addPhoto(firstPhoto);
+        photoCollection.addSlide(slide);
+
+        addNextPhoto(firstPhoto);
+    }
+
+    private void addNextPhoto(Photo photo) {
+        for (Photo comparePhoto : photoList) {
+            if (photo.compareTo(comparePhoto) > 1 && comparePhoto.isUsed()) {
+                System.out.println("Photo found");
+                Slide slide = new Slide();
+                slide.addPhoto(photo);
+                photo.markAsUsed();
+                photoCollection.addSlide(slide);
             }
         }
     }
