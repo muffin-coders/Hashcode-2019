@@ -18,4 +18,8 @@ public class Photo {
     public double compareTo(Photo photo) {
         return 0;
     }
+
+    public List<String> getTags() {
+        return tags;
+    }
 }
