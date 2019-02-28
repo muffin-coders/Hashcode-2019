@@ -9,13 +9,17 @@ public class BetterSlideShowGenerator implements SlideShowGenerator {
 
 
     @Override
-    public void generateSlideShow(PhotoCollection photoCollection) {
+    public void generateSlideShow(PhotoCollection photoCollection, PhotoCollection slidesCollection) {
         this.photoCollection = photoCollection;
+        this.slidesCollection = slidesCollection;
         setVerticalCollection();
         averageTagCount = calculateAverageTagCount();
         createVerticalSlides();
+        System.out.println("Vertical slides created");
          createHorizontalSlides();
+        System.out.println("Horizontal slides created");
          matchingSlides();
+        System.out.println("Slides matched");
 //        photoList = photoCollection.getPhotoCollection();
 //
 //        Photo firstPhoto = photoList.get(0);
@@ -29,7 +33,7 @@ public class BetterSlideShowGenerator implements SlideShowGenerator {
     }
 
     private void matchingSlides() {
-        slidesCollection = new PhotoCollection();
+        //slidesCollection = new PhotoCollection();
         int slideIndex = 0;
         int maxSlideValue = 0;
         int bestMatchId = 0;
