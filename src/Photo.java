@@ -30,19 +30,17 @@ public class Photo {
         return min(entropyActual, entropyCompared);
     }
 
-    public int compareToHorizontal(Photo photo) {
-        int entropy = 0;
+    public int getNumberOfTagsForVerticals(Photo photo) {
+        int overlapping = 0;
         for (String photoTag : tags) {
             for (String comparedPhotoTag : photo.getTags()) {
                 if (photoTag.equals(comparedPhotoTag)) {
-                    entropy++;
+                    overlapping++;
                 }
             }
         }
-        return entropy;
+        return tags.size() + photo.getNumberOfTags() - overlapping * 2;
     }
-
-    
 
     public List<String> getTags() {
         return tags;
@@ -52,23 +50,23 @@ public class Photo {
         return id;
     }
 
-    public int getNumberOfTags(){
+    public int getNumberOfTags() {
         return tags.size();
     }
 
-    public boolean isNotUsed(){
+    public boolean isNotUsed() {
         return !used;
     }
 
-    public void markAsUsed(){
+    public void markAsUsed() {
         used = true;
     }
 
-    public boolean isHorizontal(){
+    public boolean isHorizontal() {
         return isHorizontal;
     }
 
-    public boolean isVertical(){
+    public boolean isVertical() {
         return !isHorizontal;
     }
 }
