@@ -30,6 +30,20 @@ public class Photo {
         return min(entropyActual, entropyCompared);
     }
 
+    public int compareToHorizontal(Photo photo) {
+        int entropy = 0;
+        for (String photoTag : tags) {
+            for (String comparedPhotoTag : photo.getTags()) {
+                if (photoTag.equals(comparedPhotoTag)) {
+                    entropy++;
+                }
+            }
+        }
+        return entropy;
+    }
+
+    
+
     public List<String> getTags() {
         return tags;
     }
@@ -52,5 +66,9 @@ public class Photo {
 
     public boolean isHorizontal(){
         return isHorizontal;
+    }
+
+    public boolean isVertical(){
+        return !isHorizontal;
     }
 }
