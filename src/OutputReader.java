@@ -18,7 +18,7 @@ public class OutputReader {
             fileData += "\n";
         }
 
-        FileOutputStream fos = new FileOutputStream("output_" + filename + ".txt");
+        FileOutputStream fos = new FileOutputStream("output_" + filename);
         fos.write(fileData.getBytes());
         fos.flush();
         fos.close();
