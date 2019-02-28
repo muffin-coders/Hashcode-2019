@@ -1,5 +1,7 @@
 import java.util.List;
 
+import static java.lang.Math.min;
+
 public class Photo {
 
     private List<String> tags;
@@ -14,8 +16,8 @@ public class Photo {
         this.isHorizontal = isHorizontal;
     }
 
-    public double compareTo(Photo photo) {
-        double entropy = 0;
+    public int compareTo(Photo photo) {
+        int entropy = 0;
         for (String photoTag : tags) {
             for (String comparedPhotoTag : photo.getTags()) {
                 if (photoTag.equals(comparedPhotoTag)) {
@@ -23,7 +25,10 @@ public class Photo {
                 }
             }
         }
-        return entropy;
+        int entropyActual = tags.size() - entropy;
+        int entropyCompared = photo.getNumberOfTags() - entropy;
+
+        return min(entropyActual, entropyCompared);
     }
 
     public List<String> getTags() {
