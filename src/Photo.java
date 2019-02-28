@@ -4,10 +4,10 @@ public class Photo {
 
     private List<String> tags;
     private int id;
-    private boolean used;
+    private boolean used = false;
     private boolean isHorizontal;
 
-    public Photo(List<String> tags, int id, boolean used, boolean isHorizontal) {
+    public Photo(List<String> tags, int id, boolean isHorizontal) {
         this.tags = tags;
         this.id = id;
         this.used = used;
