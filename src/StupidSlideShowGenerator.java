@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class StupidSlideShowGenerator implements SlideShowGenerator {
-    List<Photo> photoList;
+    private List<Photo> photoList;
     private PhotoCollection photoCollection;
 
     @Override
@@ -20,12 +20,10 @@ public class StupidSlideShowGenerator implements SlideShowGenerator {
         slide.addPhoto(firstPhoto);
         photoCollection.addSlide(slide);
 
-//        while (true) {
-//            addNextPhoto(firstPhoto);
-//        }
+        addNextPhoto(firstPhoto);
     }
 
-    private Photo addNextPhoto(Photo photo) {
+    private void addNextPhoto(Photo photo) {
         for (Photo comparePhoto : photoList) {
             if (comparePhoto.isNotUsed() && comparePhoto.isHorizontal()) {
                 if (photo.compareTo(comparePhoto) > 1) {
@@ -34,10 +32,8 @@ public class StupidSlideShowGenerator implements SlideShowGenerator {
                     slide.addPhoto(comparePhoto);
                     photo.markAsUsed();
                     photoCollection.addSlide(slide);
-                    return comparePhoto;
                 }
             }
         }
-        return null;
     }
 }
