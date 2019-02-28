@@ -1,3 +1,3 @@
-public class SlideShowGenerator {
-
+public interface SlideShowGenerator {
+    void generatePictures();
 }
