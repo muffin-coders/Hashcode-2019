@@ -9,33 +9,65 @@ public class Matti implements SlideShowGenerator {
         this.photoCollection = photoCollection;
         photoList = photoCollection.getPhotoCollection();
 
-        Photo nextNode = photoList.get(photoList.size() / 2);
+        int i = 0;
+        Photo nextNode = photoList.get(i);
+        while (nextNode.isVertical()) {
+            i++;
+            if (i > photoList.size()) {
+                new StupidVerticalSlideShowGenerator().generateSlideShow(photoCollection);
+            }
+            nextNode = photoList.get(i);
+        }
 
         if (nextNode.isHorizontal()) {
+            nextNode.markAsUsed();
             add(nextNode);
 
-            for (int i = 0; i < photoList.size() * 4; i++) {
+            for (i = 0; i < photoList.size(); i++) {
+                Photo previousNode = nextNode;
                 nextNode = searchNext(nextNode);
                 if (nextNode == null) {
-                    nextNode = searchNextVertical(nextNode);
-                    add(nextNode);
-                    nextNode = searchNextVertical(nextNode);
+                    nextNode = searchNextVertical(previousNode);
+                    if (nextNode == null)
+                        return;
+                    Slide slide = new Slide();
+
+                    Photo nextNode2 = searchNextVertical(nextNode);
+
+                    if (nextNode2 == null)
+                        return;
+                    slide.addPhoto(nextNode);
+                    nextNode.markAsUsed();
+                    slide.addPhoto(nextNode2);
+                    nextNode2.markAsUsed();
+
+                    photoCollection.addSlide(slide);
+                    nextNode = findNextFree();
                 }
 
-                if (nextNode == null)
-                    continue;
-                System.out.println("photo found");
                 add(nextNode);
             }
         }
     }
 
+    private Photo findNextFree() {
+        for (Photo found : photoList) {
+            if (found.isNotUsed()) {
+                found.markAsUsed();
+                return found;
+            }
+        }
+        return null;
+    }
+
     private Photo searchNextVertical(Photo startNode) {
+        if (startNode == null)
+            return null;
         for (Photo comparePhoto : photoList) {
             if (!comparePhoto.isNotUsed() || comparePhoto.isHorizontal()) {
                 continue;
             }
-            if (startNode.compareTo(comparePhoto) > 1) {
+            if (startNode.compareTo(comparePhoto) > 0) {
                 comparePhoto.markAsUsed();
                 return comparePhoto;
             }
@@ -54,7 +86,7 @@ public class Matti implements SlideShowGenerator {
             if (!comparePhoto.isNotUsed() || comparePhoto.isVertical()) {
                 continue;
             }
-            if (startNode.compareTo(comparePhoto) > 1) {
+            if (startNode.compareTo(comparePhoto) > 8) {
                 comparePhoto.markAsUsed();
                 return comparePhoto;
             }
