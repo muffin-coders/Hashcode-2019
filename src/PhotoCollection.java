@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoCollection {
-    ArrayList<Photo> photoCollection;
+    List<Photo> photoCollection = new ArrayList<>();
 
-    public void setPhotoCollection(List<Photo> collection) {
-        photoCollection = (ArrayList<Photo>) collection;
+    public void addPhoto(Photo photo) {
+        photoCollection.add(photo);
     }
 
-    public List<Photo> getPhotoCollection(){
+    public List<Photo> getPhotoCollection() {
         return photoCollection;
     }
 }

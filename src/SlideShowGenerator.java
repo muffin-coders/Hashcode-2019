@@ -1,3 +1,3 @@
 public interface SlideShowGenerator {
-    void generatePictures();
+    void generateSlideShow(PhotoCollection photoCollection);
 }
