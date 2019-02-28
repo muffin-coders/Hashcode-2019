@@ -2,8 +2,8 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String[] files = {"a_example.txt"};//, "b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt"};
-        SlideShowGenerator slideShowGeneratorStrategy = new StupidSlideShowGenerator();
+        String[] files = {"a_example.txt", "b_lovely_landscapes.txt"}; //, "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt"};
+        SlideShowGenerator slideShowGeneratorStrategy = new BetterSlideShowGenerator();
 
         for (String file : files) {
             System.out.println("Input " + file);
@@ -15,8 +15,12 @@ public class Main {
             slideShowGeneratorStrategy.generateSlideShow(photoCollection);
 
             // Call output writer
+        try {
             OutputReader.generateOutput(photoCollection, slideShowGeneratorStrategy.getClass().getName() + "_" + file);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
     }
 
 }

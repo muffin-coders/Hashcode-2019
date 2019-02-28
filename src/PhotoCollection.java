@@ -38,4 +38,13 @@ public class PhotoCollection {
     public void setVerticalCount(int verticalCount) {
         this.verticalCount = verticalCount;
     }
+
+    public boolean hasNotUsedPhotos(){
+        for(Photo photo: photoCollection){
+            if(photo.isNotUsed()){
+                return true;
+            }
+        }
+        return false;
+    }
 }
