@@ -8,6 +8,8 @@ public class Photo {
     private int id;
     private boolean used = false;
     private boolean isHorizontal;
+    private boolean isHead = false;
+    private boolean isTail = false;
 
     public Photo(List<String> tags, int id, boolean isHorizontal) {
         this.tags = tags;
@@ -68,5 +70,21 @@ public class Photo {
 
     public boolean isVertical() {
         return !isHorizontal;
+    }
+
+    public void setHead(){
+        isHead = !isHead;
+    }
+
+    public boolean isHead(){
+        return isHead;
+    }
+
+    public void setTail(){
+        isTail = !isTail;
+    }
+
+    public boolean isTail(){
+        return isTail;
     }
 }
