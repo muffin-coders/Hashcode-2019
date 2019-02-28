@@ -7,7 +7,7 @@ public class InputReader {
     private boolean isFistline = true;
     private int numberOfPhotos;
     private PhotoCollection collection;
-    private int picCounter = 1;
+    private int picCounter = 0;
     private int horizontalCount = 0;
     private int verticalCount = 0;
 
