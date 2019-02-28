@@ -8,6 +8,8 @@ public class InputReader {
     private int numberOfPhotos;
     private PhotoCollection collection;
     private int picCounter = 1;
+    private int horizontalCount = 0;
+    private int verticalCount = 0;
 
     public InputReader(String file) {
         this.file = file;
@@ -26,6 +28,9 @@ public class InputReader {
                     String[] detail = line.split(" ");
                     if (detail[0].toUpperCase().contains("H")) {
                         isHorizontal = true;
+                        horizontalCount++;
+                    } else{
+                        verticalCount++;
                     }
 
                     int numberOfTags = Integer.parseInt(detail[1]);
@@ -46,13 +51,15 @@ public class InputReader {
         if(collection.getPhotoCollection().size() == numberOfPhotos){
             System.out.println("All pictures in list");
         }
+        collection.setHorizontalCount(horizontalCount);
+        collection.setVerticalCount(verticalCount);
         return collection;
     }
 
     public void test() {
         PhotoCollection collectionTmp = read();
         for (Photo photo: collectionTmp.getPhotoCollection()) {
-            System.out.println(photo.getTags());
+            System.out.println(photo.getId() + " " + photo.getTags() + " " + photo.isHorizontal());
         }
     }
 
