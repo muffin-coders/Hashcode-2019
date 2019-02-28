@@ -1,12 +1,11 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Photo {
 
-    List<String> tags = new ArrayList<>();
-    int id;
-    boolean used;
-    boolean isHorizontal;
+    private List<String> tags;
+    private int id;
+    private boolean used;
+    private boolean isHorizontal;
 
     public Photo(List<String> tags, int id, boolean used, boolean isHorizontal) {
         this.tags = tags;
@@ -16,7 +15,15 @@ public class Photo {
     }
 
     public double compareTo(Photo photo) {
-        return 0;
+        double entropy = 0;
+        for (String photoTag : tags) {
+            for (String comparedPhotoTag : photo.getTags()) {
+                if (photoTag.equals(comparedPhotoTag)) {
+                    entropy++;
+                }
+            }
+        }
+        return entropy;
     }
 
     public List<String> getTags() {
