@@ -15,7 +15,7 @@ public class OutputReader {
             for (Photo photo : photos) {
                 fileData += photo.getId() + " ";
             }
-            fileData += " ";
+            fileData += "\n";
         }
 
         FileOutputStream fos = new FileOutputStream("output_" + filename + ".txt");
