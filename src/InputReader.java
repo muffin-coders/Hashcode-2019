@@ -1,27 +1,41 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputReader {
     private final String file;
-    private Pizza pizza;
     private boolean isFistline = true;
-    private int rows, cols, minNrOfIngredient, maxNrOfCells;
-    private char[][] ingrediants;
+    private int numberOfPhotos;
+    private PhotoCollection collection;
+    private int picCounter = 1;
 
     public InputReader(String file) {
         this.file = file;
     }
 
-    public Pizza read() {
-        int rowCounter = 0;
+    public PhotoCollection read() {
+        collection = new PhotoCollection();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("res/" + file))))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (isFistline) {
-                    createPizza(line);
+                    numberOfPhotos = Integer.parseInt(line);
                     isFistline = false;
                 } else {
-                    addIngrediants(line, rowCounter);
-                    rowCounter++;
+                    boolean isHorizontal = false;
+                    String[] detail = line.split(" ");
+                    if (detail[0].toUpperCase().contains("H")) {
+                        isHorizontal = true;
+                    }
+
+                    int numberOfTags = Integer.parseInt(detail[1]);
+                    List<String> tagList = new ArrayList<>();
+                    for (int i = 0; i < numberOfTags; i++) {
+                        tagList.add(detail[2 + i]);
+                    }
+                    Photo photo = new Photo(tagList, picCounter, isHorizontal);
+                    collection.addPhoto(photo);
+                    picCounter++;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -29,36 +43,21 @@ public class InputReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-<<<<<<< Updated upstream
-
-        return new Pizza(rows, cols, minNrOfIngredient, maxNrOfCells, ingrediants);
-=======
-        pizza = new Pizza(rows, cols, minNrOfIngredient, maxNrOfCells, ingrediants);
-        return pizza;
->>>>>>> Stashed changes
+        if(collection.getPhotoCollection().size() == numberOfPhotos){
+            System.out.println("All pictures in list");
+        }
+        return collection;
     }
 
-    private void addIngrediants(String line, int rowCounter) {
-        for (int i = 0; i < cols; i++) {
-            ingrediants[rowCounter][i] = line.charAt(i);
+    public void test() {
+        PhotoCollection collectionTmp = read();
+        for (Photo photo: collectionTmp.getPhotoCollection()) {
+            System.out.println(photo.getTags());
         }
     }
 
-    private void createPizza(String line) {
-        String[] firstLine = line.split(" ");
-        rows = Integer.parseInt(firstLine[0]);
-        cols = Integer.parseInt(firstLine[1]);
-        minNrOfIngredient = Integer.parseInt(firstLine[2]);
-        maxNrOfCells = Integer.parseInt(firstLine[3]);
-        ingrediants = new char[rows][cols];
-    }
-
-    private void test() {
-        for (int i = 0; i < ingrediants.length; i++) {
-            for (int j = 0; j < ingrediants[0].length; j++) {
-                System.out.print(ingrediants[i][j]);
-            }
-            System.out.println();
-        }
+    public static void main(String[] args){
+        InputReader reader = new InputReader("a_example.txt");
+        reader.test();
     }
 }
