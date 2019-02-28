@@ -22,4 +22,8 @@ public class Photo {
     public List<String> getTags() {
         return tags;
     }
+
+    public int getId() {
+        return id;
+    }
 }
