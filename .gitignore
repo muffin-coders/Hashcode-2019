@@ -2,3 +2,10 @@
 .idea/*
 .DS_Store
 *.class
+
+output_StupidSlideShowGenerator_c_memorable_moments.txt
+output_StupidSlideShowGenerator_e_shiny_selfies.txt
+output_StupidSlideShowGenerator_d_pet_pictures.txt
+output_StupidSlideShowGenerator_a_example.txt
+output_StupidSlideShowGenerator_b_lovely_landscapes.txt
+src.zip

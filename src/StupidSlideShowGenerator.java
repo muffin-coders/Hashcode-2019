@@ -19,12 +19,14 @@ public class StupidSlideShowGenerator implements SlideShowGenerator {
 
     private void addNextPhoto(Photo photo) {
         for (Photo comparePhoto : photoList) {
-            if (photo.compareTo(comparePhoto) > 1 && comparePhoto.isNotUsed()) {
-                System.out.println("Photo found");
-                Slide slide = new Slide();
-                slide.addPhoto(photo);
-                photo.markAsUsed();
-                photoCollection.addSlide(slide);
+            if (comparePhoto.isNotUsed() && photo.isHorizontal()) {
+                if (photo.compareTo(comparePhoto) > 1) {
+                    System.out.println("Photo found");
+                    Slide slide = new Slide();
+                    slide.addPhoto(comparePhoto);
+                    photo.markAsUsed();
+                    photoCollection.addSlide(slide);
+                }
             }
         }
     }
