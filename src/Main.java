@@ -5,6 +5,7 @@ public class Main {
         String[] files = {"a_example.txt", "b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt"};
         SlideShowGenerator slideShowGeneratorStrategy = new StupidSlideShowGenerator();
         SlideShowGenerator slideShowGeneratorStrategyVertical = new StupidVerticalSlideShowGenerator();
+        SlideShowGenerator slideShowGeneratorStrategy = new Matti();
 
         for (String file : files) {
             System.out.println("Input " + file);
