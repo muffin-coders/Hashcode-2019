@@ -42,4 +42,12 @@ public class Photo {
     public int getNumberOfTags(){
         return tags.size();
     }
+
+    public boolean isUsed(){
+        return used;
+    }
+
+    public void markAsUsed(){
+        used = false;
+    }
 }
