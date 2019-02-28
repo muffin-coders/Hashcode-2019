@@ -35,6 +35,10 @@ public class Photo {
         return tags;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public int getNumberOfTags(){
         return tags.size();
     }
