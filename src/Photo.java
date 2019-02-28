@@ -60,6 +60,10 @@ public class Photo {
         return !used;
     }
 
+    public boolean isUsed() {
+        return used;
+    }
+
     public void markAsUsed() {
         used = true;
     }
