@@ -2,18 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoCollection {
-    ArrayList<Photo> photoCollection;
-    List<Slide> slideshow;
 
-    public void setPhotoCollection(List<Photo> collection) {
-        photoCollection = (ArrayList<Photo>) collection;
+    List<Photo> photoCollection = new ArrayList<>();
+    List<Slide> slideCollection = new ArrayList<>();
+
+    public void addPhoto(Photo photo) {
+        photoCollection.add(photo);
     }
 
-    public List<Photo> getPhotoCollection(){
+    public List<Photo> getPhotoCollection() {
         return photoCollection;
     }
 
-    public List<Slide> getSlideshow(){
-        return slideshow;
+    public List<Slide> getSlideCollection() {
+        return slideCollection;
+    }
+
+    public void addSlide(Slide slide){
+        slideCollection.add(slide);
     }
 }

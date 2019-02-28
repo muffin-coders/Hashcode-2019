@@ -6,11 +6,11 @@ public class OutputReader {
 
     public static void generateOutput(PhotoCollection photoCollection, String filename) throws IOException {
 
-        List<Slide> slideshow = photoCollection.getSlideshow();
+        List<Slide> slideCollection = photoCollection.getSlideCollection();
 
-        String fileData = slideshow.size() + "\n";
+        String fileData = slideCollection.size() + "\n";
 
-        for (Slide slide : slideshow) {
+        for (Slide slide : slideCollection) {
             List<Photo> photos = slide.getPhotos();
             for (Photo photo : photos) {
                 fileData += photo.getId() + " ";
