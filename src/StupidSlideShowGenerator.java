@@ -9,25 +9,35 @@ public class StupidSlideShowGenerator implements SlideShowGenerator {
         this.photoCollection = photoCollection;
         photoList = photoCollection.getPhotoCollection();
 
-        Photo firstPhoto = photoList.get(0);
+        int i = 0;
+        Photo firstPhoto = photoList.get(i);
+
+        while (firstPhoto.isVertical()) {
+            firstPhoto = photoList.get(++i);
+        }
+
         Slide slide = new Slide();
         slide.addPhoto(firstPhoto);
         photoCollection.addSlide(slide);
 
-        addNextPhoto(firstPhoto);
+//        while (true) {
+//            addNextPhoto(firstPhoto);
+//        }
     }
 
-    private void addNextPhoto(Photo photo) {
+    private Photo addNextPhoto(Photo photo) {
         for (Photo comparePhoto : photoList) {
-            if (comparePhoto.isNotUsed() && photo.isHorizontal()) {
+            if (comparePhoto.isNotUsed() && comparePhoto.isHorizontal()) {
                 if (photo.compareTo(comparePhoto) > 1) {
                     System.out.println("Photo found");
                     Slide slide = new Slide();
                     slide.addPhoto(comparePhoto);
                     photo.markAsUsed();
                     photoCollection.addSlide(slide);
+                    return comparePhoto;
                 }
             }
         }
+        return null;
     }
 }
