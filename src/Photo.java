@@ -8,8 +8,8 @@ public class Photo {
     private int id;
     private boolean used = false;
     private boolean isHorizontal;
-    private boolean isHead = false;
-    private boolean isTail = false;
+    private Photo bestMatch;
+    private int bestMatchEntropy = 0;
 
     public Photo(List<String> tags, int id, boolean isHorizontal) {
         this.tags = tags;
@@ -29,7 +29,7 @@ public class Photo {
         int entropyActual = tags.size() - entropy;
         int entropyCompared = photo.getNumberOfTags() - entropy;
 
-        return min(entropyActual, entropyCompared);
+        return min(min(entropyActual, entropyCompared), entropy);
     }
 
     public int getNumberOfTagsForVerticals(Photo photo) {
@@ -72,19 +72,16 @@ public class Photo {
         return !isHorizontal;
     }
 
-    public void setHead(){
-        isHead = !isHead;
+    public void setBestMatch(Photo bestMatch, int bestMatchEntropy) {
+        this.bestMatch = bestMatch;
+        this.bestMatchEntropy = bestMatchEntropy;
     }
 
-    public boolean isHead(){
-        return isHead;
+    public Photo getBestMatch(){
+        return bestMatch;
     }
 
-    public void setTail(){
-        isTail = !isTail;
-    }
-
-    public boolean isTail(){
-        return isTail;
+    public int getBestMatchEntropy(){
+        return bestMatchEntropy;
     }
 }

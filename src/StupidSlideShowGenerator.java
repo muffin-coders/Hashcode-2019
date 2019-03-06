@@ -5,7 +5,7 @@ public class StupidSlideShowGenerator implements SlideShowGenerator {
     private PhotoCollection photoCollection;
 
     @Override
-    public void generateSlideShow(PhotoCollection photoCollection) {
+    public PhotoCollection generateSlideShow(PhotoCollection photoCollection) {
         this.photoCollection = photoCollection;
         photoList = photoCollection.getPhotoCollection();
 
@@ -21,6 +21,7 @@ public class StupidSlideShowGenerator implements SlideShowGenerator {
         photoCollection.addSlide(slide);
 
         addNextPhoto(firstPhoto);
+        return photoCollection;
     }
 
     private void addNextPhoto(Photo photo) {
