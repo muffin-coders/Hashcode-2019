@@ -3,9 +3,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         String[] files = {"a_example.txt", "b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt"};
-        SlideShowGenerator slideShowGeneratorStrategy = new StupidSlideShowGenerator();
-        SlideShowGenerator slideShowGeneratorStrategyVertical = new StupidVerticalSlideShowGenerator();
-        SlideShowGenerator slideShowGeneratorStrategy = new Matti();
+        SlideShowGenerator slideShowGeneratorStrategy = new CliffsSlideShowGenerator();
 
         for (String file : files) {
             System.out.println("Input " + file);
@@ -14,17 +12,23 @@ public class Main {
             InputReader inputReader = new InputReader(file);
             PhotoCollection photoCollection = inputReader.read();
 
-            if (file == "e_shiny_selfies.txt") {
-                slideShowGeneratorStrategyVertical.generateSlideShow(photoCollection);
 
-                OutputReader.generateOutput(photoCollection, slideShowGeneratorStrategyVertical.getClass().getName() + "_" + file);
-            } else {
-                slideShowGeneratorStrategy.generateSlideShow(photoCollection);
+            long startTime = System.currentTimeMillis();
+            photoCollection = slideShowGeneratorStrategy.generateSlideShow(photoCollection);
+            printTimeDifference(startTime);
+          
+            slideShowGeneratorStrategy.generateSlideShow(photoCollection);
 
                 // Call output writer
-                OutputReader.generateOutput(photoCollection, slideShowGeneratorStrategy.getClass().getName() + "_" + file);
-            }
+            OutputReader.generateOutput(photoCollection, slideShowGeneratorStrategy.getClass().getName() + "_" + file);
         }
     }
 
+    private static void printTimeDifference(long startTime){
+        long difference = Math.abs(System.currentTimeMillis() - startTime);
+        int minutes = (int) (difference / 60000);
+        int seconds = (int) ((difference - minutes * 60000) / 1000);
+        int milliseconds = (int) ((difference - minutes * 60000 - seconds * 1000));
+        System.out.println("Composing successful! Required Time: " + minutes + "min " + seconds + "sec " + milliseconds + "millisec\n");
+    }
 }
