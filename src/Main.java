@@ -12,11 +12,14 @@ public class Main {
             InputReader inputReader = new InputReader(file);
             PhotoCollection photoCollection = inputReader.read();
 
+
             long startTime = System.currentTimeMillis();
             photoCollection = slideShowGeneratorStrategy.generateSlideShow(photoCollection);
             printTimeDifference(startTime);
+          
+            slideShowGeneratorStrategy.generateSlideShow(photoCollection);
 
-            // Call output writer
+                // Call output writer
             OutputReader.generateOutput(photoCollection, slideShowGeneratorStrategy.getClass().getName() + "_" + file);
         }
     }
